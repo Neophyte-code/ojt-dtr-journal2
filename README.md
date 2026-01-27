@@ -1,59 +1,116 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# OJT DTR & Weekly Journal System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A web-based system designed to manage **Daily Time Records (DTR)** and **Weekly Journal Reports** for On-the-Job Trainees (OJTs) and Interns.
 
-## About Laravel
+The system centralizes attendance tracking, structured weekly reporting, admin review, certification, and data export for official university and company submission.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Project Overview
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+The OJT DTR & Weekly Journal System replaces manual logs and document-based reporting with a secure, auditable, and standardized digital platform.
 
-## Learning Laravel
+It supports two primary roles:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+* **Intern / OJT** – Logs attendance and submits weekly reports
+* **Admin** – Reviews, certifies, and exports records
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## Core Features
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### Intern / OJT
 
-### Premium Partners
+* Daily Time-In / Time-Out
+* Automatic total hour computation
+* Weekly journal report submission
+* Structured reporting format
+* Report status tracking (Pending / Viewed / Certified)
+* View attendance and report history
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### Admin
 
-## Contributing
+* View intern attendance records
+* Review weekly journal reports
+* Mark reports as viewed
+* Certify reports with digital signature
+* Monitor total rendered hours
+* Export DTR and report data
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+---
 
-## Code of Conduct
+## Weekly Journal Structure
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Weekly reports follow a structured format:
 
-## Security Vulnerabilities
+1. Week Focus
+2. Topics & Concepts Learned
+3. Outputs & Links
+4. What You Built or Designed
+5. Decisions & Reasoning
+6. Challenges & Blockers
+7. What You’d Improve Next Time
+8. Key Takeaway of the Week
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
+
+## Tech Stack
+
+* **Laravel** – Backend framework
+* **FilamentPHP** – Admin panel and UI
+* **Tailwind CSS** – Styling
+* **PestPHP** – Automated testing
+* **MySQL** – Database
+
+---
+
+## Development Approach
+
+This project uses a **feature-based ownership model**:
+
+* Each developer owns a feature end-to-end
+* Features are developed in parallel
+* Integration is handled through Pull Requests
+
+A fork-based GitHub workflow is used to ensure clean collaboration.
+
+---
+
+## Getting Started (Development)
+
+High-level setup steps:
+
+1. Clone or fork the repository
+2. Configure environment variables
+3. Install dependencies
+4. Run migrations
+5. Access the Filament panel
+
+Detailed setup instructions may be added later.
+
+---
+
+## Contribution Guidelines
+
+All contributors must follow the rules defined in `CONTRIBUTING.md`.
+
+This includes:
+
+* Branching conventions
+* Pull request requirements
+* Testing expectations
+* Code review process
+
+---
+
+## Project Status
+
+This project is actively developed as part of an On-the-Job Training (OJT) program.
+
+Features and documentation may evolve as development progresses.
+
+---
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is for educational and internal training purposes.
