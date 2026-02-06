@@ -38,7 +38,8 @@ class DatabaseSeeder extends Seeder
             ShiftSeeder::class,
             UserSeeder::class,
             TestDtrLogsSeeder::class,
-            WeeklyReportsSeeder::class
+            WeeklyReportsSeeder::class,
+            AttendancesSeeder::class
         ]);
     }
 }

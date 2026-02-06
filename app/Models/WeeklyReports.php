@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 class WeeklyReports extends Model
 {
     /** @use HasFactory<\Database\Factories\WeeklyReportsFactory> */
@@ -116,4 +116,9 @@ class WeeklyReports extends Model
             throw new \InvalidArgumentException('The "key_takeaway" key is required and cannot be empty.');
         }
     }
+    public function getEntriesDecodedAttribute(): array
+    {
+        return $this->entries ?? [];
+    }
+    use SoftDeletes;
 }
