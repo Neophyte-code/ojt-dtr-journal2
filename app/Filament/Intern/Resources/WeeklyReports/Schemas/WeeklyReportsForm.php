@@ -2,16 +2,15 @@
 
 namespace App\Filament\Intern\Resources\WeeklyReports\Schemas;
 
-use Filament\Schemas\Schema;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Fieldset;
-use Filament\Forms\Components\RichEditor;
 use Filament\Schemas\Components\Section;
-use Filament\Forms\Components\FileUpload;
-
+use Filament\Schemas\Schema;
 
 class WeeklyReportsForm
 {
@@ -78,7 +77,6 @@ class WeeklyReportsForm
                     ->label('What you built or designed')
                     ->required(),
 
-
                 Fieldset::make('Decisions & Reasoning')
                     ->schema([
                         TextArea::make('entries.decisions_reasoning.decision_1')
@@ -115,8 +113,7 @@ class WeeklyReportsForm
 
                 FileUpload::make('signature')
                     ->image()
-                    ->imageEditor()
-                    ->required()
+                    ->imageEditor(),
             ])->columns(1);
     }
 }
