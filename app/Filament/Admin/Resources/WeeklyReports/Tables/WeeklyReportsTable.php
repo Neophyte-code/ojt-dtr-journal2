@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Filament\Admin\Resources\WeeklyReports\Tables;
-
+use Filament\Actions\ViewAction;
 use App\Services\Exports\WeeklyReportsExportService;
 use Filament\Actions\BulkAction;
 use Filament\Actions\BulkActionGroup;

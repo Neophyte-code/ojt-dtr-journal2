@@ -11,6 +11,8 @@ use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Fieldset;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
+use Saade\FilamentAutograph\Forms\Components\SignaturePad;
+use Illuminate\Support\Facades\Storage;
 
 class WeeklyReportsForm
 {
@@ -111,9 +113,31 @@ class WeeklyReportsForm
                     ->label('Key Takeaway of the week')
                     ->required(),
 
-                FileUpload::make('signature')
-                    ->image()
-                    ->imageEditor(),
+                SignaturePad::make('signature')
+                    ->label(__('Sign here'))
+                    ->confirmable() 
+                    ->dotSize(2.0)
+                    ->lineMinWidth(0.5)
+                    ->lineMaxWidth(2.5)
+                    ->throttle(16)
+                    ->minDistance(5)
+                    ->velocityFilterWeight(0.7)
+                    ->afterStateUpdated(function ($state, $set) {
+                        if ($state) {
+                            // Decode Base64
+                            $imageData = explode(',', $state)[1];
+                            $image = base64_decode($imageData);
+
+                            // Create a unique filename
+                            $fileName = 'signatures/signature_' . time() . '.png';
+
+                            // Save file to storage/app/signatures
+                            Storage::put($fileName, $image);
+
+                            // Replace state with the file path
+                            $set('signature', $fileName);
+                        }
+                    })
             ])->columns(1);
     }
 }

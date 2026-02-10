@@ -1,0 +1,17 @@
+{
+    "_hash": "98132cdcefb8770bccceb0f2327ac29c658b99819663e21dda6521263025bae2",
+    "patches": {
+        "saade/filament-autograph": [
+            {
+                "package": "saade/filament-autograph",
+                "description": "Allow Filament 5 (PR #51)",
+                "url": "patches/filament-autograph-filament-v5.patch",
+                "sha256": "52ff11f13e411a6b91caacd8f0a11ed472ce0c3331e42ae740d410795ba9d5b9",
+                "depth": 1,
+                "extra": {
+                    "provenance": "root"
+                }
+            }
+        ]
+    }
+}
