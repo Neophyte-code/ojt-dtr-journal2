@@ -9,17 +9,16 @@ use Illuminate\Support\Facades\Auth;
 
 class DtrStatsWidget extends StatsOverviewWidget
 {
+
     protected function getStats(): array
     {
-        $user = Auth::user();
+        $userId = Auth::id();
 
-        // get all the totals from DB
-        $stats = DtrLog::where('user_id', $user->id)
+        $stats = DtrLog::where('user_id', $userId)
             ->selectRaw('SUM(work_minutes) as total_work, SUM(late_minutes) as total_late')
             ->first();
 
-        // Count unique work dates to get total days worked
-        $totalDays = DtrLog::where('user_id', $user->id)
+        $totalDays = DtrLog::where('user_id', $userId)
             ->distinct('work_date')
             ->count('work_date');
 
@@ -40,7 +39,7 @@ class DtrStatsWidget extends StatsOverviewWidget
     // function to format time
     private function formatTime(int $totalMinutes): string
     {
-        // Use abs() to convert -15 to 15
+        // Use abs() to convert negative to positive
         $totalMinutes = abs($totalMinutes);
 
         if ($totalMinutes === 0) {
