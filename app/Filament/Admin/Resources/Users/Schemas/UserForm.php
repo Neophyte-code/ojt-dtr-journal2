@@ -4,6 +4,7 @@ namespace App\Filament\Admin\Resources\Users\Schemas;
 
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
+use Illuminate\Support\Facades\Hash;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
@@ -25,8 +26,13 @@ class UserForm
                         // DateTimePicker::make('email_verified_at')
                         //     ->label('Email Verification Date'),
                         TextInput::make('password')
-                            ->password()
-                            ->required(),
+                        ->password()
+                        ->revealable() // 👁 show / hide toggle
+                        ->label('New Password')
+                        ->helperText('Leave blank to keep the current password')
+                        ->dehydrateStateUsing(fn ($state) => Hash::make($state))
+                        ->dehydrated(fn ($state) => filled($state))
+                        ->required(false),
                         Select::make('role')
                             ->options(['intern' => 'Intern', 'admin' => 'Admin'])
                             ->default('intern')
