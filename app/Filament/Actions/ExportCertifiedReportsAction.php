@@ -39,9 +39,10 @@ class ExportCertifiedReportsAction
 
                 $path = app(WeeklyReportsExportService::class)
                     ->exportCertifiedReports(collect([$report]));
-                    return redirect()->route('exports.download', [
-                        'path' => encrypt($path),
-                    ]);
+
+                return redirect()->route('exports.download', [
+                    'path' => encrypt($path),
+                ]);
             });
     }
 }

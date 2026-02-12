@@ -3,9 +3,9 @@
 namespace App\Filament\Admin\Resources\Users\Pages;
 
 use App\Filament\Admin\Resources\Users\UserResource;
-use Filament\Resources\Pages\CreateRecord;
 use App\Models\AdminActivities;
 use App\Models\User;
+use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Support\Facades\Auth;
 
 class CreateUser extends CreateRecord
@@ -20,8 +20,7 @@ class CreateUser extends CreateRecord
             'subject_type' => User::class,
             'action' => 'created user',
             'subject_id' => $this->record->id,
-            
-           
+
         ]);
     }
 }

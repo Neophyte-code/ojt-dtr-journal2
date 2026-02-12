@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Auth;
 
 class DtrStatsWidget extends StatsOverviewWidget
 {
-
     protected function getStats(): array
     {
         $userId = Auth::id();

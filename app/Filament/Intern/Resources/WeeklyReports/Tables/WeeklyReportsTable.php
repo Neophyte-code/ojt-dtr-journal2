@@ -88,9 +88,10 @@ class WeeklyReportsTable
                                 ->send();
                             $path = app(WeeklyReportsExportService::class)
                                 ->exportCertifiedReports($reports);
-                                return redirect()->route('exports.download', [
-                                    'path' => encrypt($path),
-                                ]);
+
+                            return redirect()->route('exports.download', [
+                                'path' => encrypt($path),
+                            ]);
                         }),
                 ]),
             ]);

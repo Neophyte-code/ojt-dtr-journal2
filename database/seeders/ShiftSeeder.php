@@ -12,7 +12,7 @@ class ShiftSeeder extends Seeder
      */
     public function run(): void
     {
-        //Day Shift
+        // Day Shift
         Shift::updateOrCreate(
             ['name' => 'Day Shift'],
             [
@@ -23,7 +23,7 @@ class ShiftSeeder extends Seeder
             ]
         );
 
-        //Night Shift
+        // Night Shift
         Shift::updateOrCreate(
             ['name' => 'Night Shift'],
             [
@@ -34,7 +34,7 @@ class ShiftSeeder extends Seeder
             ]
         );
 
-        //Mid Shift
+        // Mid Shift
         Shift::updateOrCreate(
             ['name' => 'Mid Shift'],
             [

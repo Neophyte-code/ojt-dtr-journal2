@@ -2,10 +2,10 @@
 
 namespace App\Filament\Admin\Resources\WeeklyReports\Tables;
 
-use Filament\Actions\ViewAction;
 use App\Services\Exports\WeeklyReportsExportService;
 use Filament\Actions\BulkAction;
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\ViewAction;
 use Filament\Forms\Components\DatePicker;
 use Filament\Notifications\Notification;
 use Filament\Tables\Columns\TextColumn;
@@ -116,9 +116,9 @@ class WeeklyReportsTable
                                 ->body('Your Export file is being generated...')
                                 ->success()
                                 ->send();
-                                $path = app(WeeklyReportsExportService::class)
+                            $path = app(WeeklyReportsExportService::class)
                                 ->exportCertifiedReports($reports);
-                        
+
                             return redirect()->route('exports.download', [
                                 'path' => encrypt($path),
                             ]);

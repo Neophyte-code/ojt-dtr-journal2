@@ -13,7 +13,7 @@ beforeEach(function () {
     Filament::setCurrentPanel(Filament::getPanel('intern'));
 });
 
-//helper function to simulate in and out
+// helper function to simulate in and out
 function simulateSession($user, $date, $inTime, $outTime, $lateMins = 0, $workMins = 0)
 {
     DtrLog::create([

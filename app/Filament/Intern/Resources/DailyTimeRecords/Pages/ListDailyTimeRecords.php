@@ -50,10 +50,10 @@ class ListDailyTimeRecords extends ListRecords
         $now = Carbon::now();
         $workDate = $this->getBusinessDate();
 
-        $s2End = Carbon::parse($workDate . ' ' . $shift->session_2_end);
+        $s2End = Carbon::parse($workDate.' '.$shift->session_2_end);
 
         // Handle night shift
-        $s1Start = Carbon::parse($workDate . ' ' . $shift->session_1_start);
+        $s1Start = Carbon::parse($workDate.' '.$shift->session_1_start);
         if ($s2End->lt($s1Start)) {
             $s2End->addDay();
         }
@@ -90,7 +90,7 @@ class ListDailyTimeRecords extends ListRecords
                 ->color('success')
                 ->requiresConfirmation()
                 ->disabled(! ($logCount === 0 || $logCount === 2))
-                ->action(fn() => $this->saveLog(1))
+                ->action(fn () => $this->saveLog(1))
                 ->successNotificationTitle('Clocked in successfully'),
 
             // For time out
@@ -99,7 +99,7 @@ class ListDailyTimeRecords extends ListRecords
                 ->color('info')
                 ->requiresConfirmation()
                 ->disabled(! ($logCount === 1 || $logCount === 3))
-                ->action(fn() => $this->saveLog(2))
+                ->action(fn () => $this->saveLog(2))
                 ->successNotificationTitle('Clocked out successfully'),
         ];
     }
@@ -116,15 +116,21 @@ class ListDailyTimeRecords extends ListRecords
         $workMinutes = 0;
 
         // Standardize Session boundaries for the current Business Date
-        $s1Start = Carbon::parse($workDate . ' ' . $shift->session_1_start);
-        $s1End   = Carbon::parse($workDate . ' ' . $shift->session_1_end);
-        $s2Start = Carbon::parse($workDate . ' ' . $shift->session_2_start);
-        $s2End   = Carbon::parse($workDate . ' ' . $shift->session_2_end);
+        $s1Start = Carbon::parse($workDate.' '.$shift->session_1_start);
+        $s1End = Carbon::parse($workDate.' '.$shift->session_1_end);
+        $s2Start = Carbon::parse($workDate.' '.$shift->session_2_start);
+        $s2End = Carbon::parse($workDate.' '.$shift->session_2_end);
 
         // Handle Night Shift rollovers for boundaries
-        if ($s1End->lt($s1Start)) $s1End->addDay();
-        while ($s2Start->lt($s1End)) $s2Start->addDay();
-        while ($s2End->lt($s2Start)) $s2End->addDay();
+        if ($s1End->lt($s1Start)) {
+            $s1End->addDay();
+        }
+        while ($s2Start->lt($s1End)) {
+            $s2Start->addDay();
+        }
+        while ($s2End->lt($s2Start)) {
+            $s2End->addDay();
+        }
 
         // time in
         if ($type === 1) {

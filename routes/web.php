@@ -2,6 +2,7 @@
 
 use Filament\Facades\Filament;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\File;
 
 Route::get('/', function () {
     return redirect(Filament::getPanel('intern')->getUrl());
@@ -17,6 +18,6 @@ Route::get('/exports/download/{path}', function ($path) {
         ->deleteFileAfterSend(true);
 })->name('exports.download');
 
-Route::get('/dtr-system/{any?}', function () {
-    return file_get_contents(public_path('dtr-system/index.html'));
-})->where('any', '.*');
+Route::get('/docs', function () {
+    return File::get(public_path('docs/index.html'));
+});

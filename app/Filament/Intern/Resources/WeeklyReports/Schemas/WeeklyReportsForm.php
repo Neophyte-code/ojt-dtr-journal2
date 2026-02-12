@@ -3,7 +3,6 @@
 namespace App\Filament\Intern\Resources\WeeklyReports\Schemas;
 
 use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Textarea;
@@ -11,8 +10,8 @@ use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Fieldset;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
-use Saade\FilamentAutograph\Forms\Components\SignaturePad;
 use Illuminate\Support\Facades\Storage;
+use Saade\FilamentAutograph\Forms\Components\SignaturePad;
 
 class WeeklyReportsForm
 {
@@ -115,7 +114,8 @@ class WeeklyReportsForm
 
                 SignaturePad::make('signature')
                     ->label(__('Sign here'))
-                    ->confirmable() 
+                ->required()
+                ->confirmable()
                     ->dotSize(2.0)
                     ->lineMinWidth(0.5)
                     ->lineMaxWidth(2.5)
@@ -128,8 +128,8 @@ class WeeklyReportsForm
                             $imageData = explode(',', $state)[1];
                             $image = base64_decode($imageData);
 
-                            // Create a unique filename
-                            $fileName = 'signatures/signature_' . time() . '.png';
+                    // Create a unique filename
+                    $fileName = 'signatures/signature_' . time() . '.png';
 
                             // Save file to storage/app/signatures
                             Storage::put($fileName, $image);
@@ -137,7 +137,7 @@ class WeeklyReportsForm
                             // Replace state with the file path
                             $set('signature', $fileName);
                         }
-                    })
+                }),
             ])->columns(1);
     }
 }
