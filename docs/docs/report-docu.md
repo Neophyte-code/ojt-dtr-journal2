@@ -1,3 +1,9 @@
+---
+id: Weekly Journal
+title: Weekly Journal Guide
+sidebar_label: Weekly Journal
+---
+
 # Weekly Journal Report – User Guide (Intern)
 
 ## Overview

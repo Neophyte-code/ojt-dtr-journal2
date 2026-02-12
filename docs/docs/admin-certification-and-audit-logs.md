@@ -1,3 +1,9 @@
+---
+id: Admin Certification and Audit Logs
+title: Admin Certification and Audit Logs Guide
+sidebar_label: Admin Certification and Audit Logs
+---
+
 # Audit Logs & User Management System
 
 This module handles audit logging, user management, and weekly report monitoring for the DTR system.  
@@ -49,6 +55,7 @@ It focuses on tracking actions, enforcing role-based rules, and ensuring data in
   - MUST be assigned a shift.
   - Available shifts:
     - Day Shift
+    - Mid Shift
     - Night Shift
   - Intern users **cannot be created** without assigning a shift.
 
@@ -66,3 +73,4 @@ This system ensures:
 ## Notes
 - Audit-related records are intentionally immutable.
 - Business rules are enforced both in the UI and backend logic.
+- Global Search feature search for relevant user records across modules.
