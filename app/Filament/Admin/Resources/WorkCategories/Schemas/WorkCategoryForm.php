@@ -13,7 +13,7 @@ class WorkCategoryForm
         return $schema->components([
             Section::make("")
                 ->schema([
-                    TextInput::make("Category")
+                    TextInput::make("name")
                         ->label(
                             fn(string $operation) => $operation === "create"
                                 ? "Create a new Work Category"
