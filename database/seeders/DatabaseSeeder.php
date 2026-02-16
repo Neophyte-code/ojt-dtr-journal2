@@ -19,32 +19,31 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([ShiftSeeder::class]);
 
-        $nightShiftId = Shift::where('name', 'Night Shift')->value('id');
+        $nightShiftId = Shift::where("name", "Night Shift")->value("id");
 
         User::updateOrCreate(
-            ['email' => 'admin@example.com'],
+            ["email" => "admin@example.com"],
             [
-                'name' => 'Admin User',
-                'password' => Hash::make('password'),
-                'email_verified_at' => now(),
-                'role' => 'admin',
-            ]
+                "name" => "Admin User",
+                "password" => Hash::make("password"),
+                "email_verified_at" => now(),
+                "role" => "admin",
+            ],
         );
 
         User::updateOrCreate(
-            ['email' => 'intern@example.com'],
+            ["email" => "intern@example.com"],
             [
-                'name' => 'Intern User',
-                'password' => Hash::make('password'),
-                'email_verified_at' => now(),
-                'role' => 'intern',
-                'shift_id' => $nightShiftId,
-            ]
+                "name" => "Intern User",
+                "password" => Hash::make("password"),
+                "email_verified_at" => now(),
+                "role" => "intern",
+                "shift_id" => $nightShiftId,
+            ],
         );
 
         $this->call([UserSeeder::class]);
         $this->call([WeeklyReportsSeeder::class]);
         $this->call([TestDtrLogsSeeder::class]);
-        $this->call([WorkCategorySeeder::class]);
     }
 }

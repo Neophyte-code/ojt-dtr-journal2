@@ -5,29 +5,32 @@ use App\Filament\Admin\Resources\WeeklyReports\WeeklyReportsResource;
 use App\Models\User;
 use App\Models\WeeklyReports;
 use App\Services\Exports\WeeklyReportsExportService;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+//use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Livewire;
 use ZipArchive;
 
-uses(RefreshDatabase::class);
+//uses(RefreshDatabase::class);
 
 beforeEach(function () {
-    Storage::fake('local');
+    Storage::fake("local");
 });
 
-it('Exports only certified reports into a zip', function () {
+it("Exports only certified reports into a zip", function () {
+    User::factory()
+        ->count(1)
+        ->create([
+            "role" => "admin",
+        ]);
 
-    User::factory()->count(1)->create([
-        'role' => 'admin',
-    ]);
-
-    $certified = WeeklyReports::factory()->count(2)->create([
-        'status' => 'certified',
-    ]);
+    $certified = WeeklyReports::factory()
+        ->count(2)
+        ->create([
+            "status" => "certified",
+        ]);
 
     WeeklyReports::factory()->create([
-        'status' => 'pending',
+        "status" => "pending",
     ]);
 
     $service = app(WeeklyReportsExportService::class);
@@ -37,7 +40,7 @@ it('Exports only certified reports into a zip', function () {
     expect($path)->toBeString();
     expect(file_exists($path))->toBeTrue();
 
-    $zip = new ZipArchive;
+    $zip = new ZipArchive();
     $opened = $zip->open($path);
 
     expect($opened)->toBeTrue();
@@ -46,13 +49,13 @@ it('Exports only certified reports into a zip', function () {
     $zip->close();
 });
 
-it('exports a docx file when one file is exported', function () {
-    $admin = User::factory()->create(['role' => 'admin']);
+it("exports a docx file when one file is exported", function () {
+    $admin = User::factory()->create(["role" => "admin"]);
     $this->actingAs($admin);
 
     $report = WeeklyReports::factory()->create([
-        'status' => 'certified',
-        'certified_by' => $admin->id,
+        "status" => "certified",
+        "certified_by" => $admin->id,
     ]);
 
     $service = app(WeeklyReportsExportService::class);
@@ -60,39 +63,49 @@ it('exports a docx file when one file is exported', function () {
     $path = $service->exportCertifiedReports(collect([$report]));
 
     $response = $this->get(
-        route('exports.download', ['path' => encrypt($path)])
+        route("exports.download", ["path" => encrypt($path)]),
     );
 
     $response->assertOk();
-    $response->assertHeader('content-disposition');
+    $response->assertHeader("content-disposition");
 });
 
-it('Displays the Export button in the Header Actions when called', function () {
+it("Displays the Export button in the Header Actions when called", function () {
     // Sample Report data with Certifications
-    $admin = User::where('role', 'admin')->first() ?? User::factory()->create(['role' => 'admin']);
+    $admin =
+        User::where("role", "admin")->first() ??
+        User::factory()->create(["role" => "admin"]);
 
     $this->actingAs($admin);
 
-    $report = WeeklyReports::factory()->count(1)->create([
-        'status' => 'certified',
-        'certified_by' => $admin->id,
-    ])->first();
+    $report = WeeklyReports::factory()
+        ->count(1)
+        ->create([
+            "status" => "certified",
+            "certified_by" => $admin->id,
+        ])
+        ->first();
 
     // Mount the Simulation
-    $response = $this->get(WeeklyReportsResource::getUrl('view', ['record' => $report->id]));
-    $response->assertSee('Export');
+    $response = $this->get(
+        WeeklyReportsResource::getUrl("view", ["record" => $report->id]),
+    );
+    $response->assertSee("Export");
 });
 
-it('disables the Export Button when the report is not certified', function () {
-    $admin = User::where('role', 'admin')->first() ?? User::factory()->create(['role' => 'admin']);
+it("disables the Export Button when the report is not certified", function () {
+    $admin =
+        User::where("role", "admin")->first() ??
+        User::factory()->create(["role" => "admin"]);
 
     $this->actingAs($admin);
 
     $report = WeeklyReports::factory()->create([
-        'status' => 'pending',
-        'certified_by' => null,
+        "status" => "pending",
+        "certified_by" => null,
     ]);
 
-    Livewire::test(ViewWeeklyReports::class, ['record' => $report->id])
-        ->assertSee('Cannot export when not certified');
+    Livewire::test(ViewWeeklyReports::class, [
+        "record" => $report->id,
+    ])->assertSee("Cannot export when not certified");
 });
