@@ -13,6 +13,7 @@ use Filament\Schemas\Schema;
 use Illuminate\Support\Facades\Storage;
 use Saade\FilamentAutograph\Forms\Components\SignaturePad;
 use Filament\Forms\Components\Select;
+use App\Models\WorkCategory;
 
 class WeeklyReportsForm
 {
@@ -59,16 +60,27 @@ class WeeklyReportsForm
                             ->minValue(1)
                             ->required(),
 
-                        Select::make('track')
-                            ->label('Intern Track')
-                            ->options([
-                                'development' => 'Development',
-                                'designer' => 'Designer',
-                                'mixed' => 'Mixed',
-                            ])
+
+                        Select::make('work_category')
+                            ->label('Work Category')
+                            ->options(fn() => WorkCategory::pluck('name', 'name')->toArray())
+                            ->searchable()
                             ->required()
-                            ->selectablePlaceholder(false)
-                            ->default('development'),
+                            ->createOptionForm([
+                                TextInput::make('new_category')
+                                    ->label('Add New Category')
+                                    ->required(),
+                            ])
+                            ->createOptionUsing(function (array $data) {
+                                $category = WorkCategory::firstOrCreate([
+                                    'name' => $data['new_category'],
+                                    'created_by' => auth()->id(),
+                                ]);
+
+                                return $category->name; 
+                            })
+                            ->placeholder('Select category'),
+
                     ])
                     ->columns(4),
 

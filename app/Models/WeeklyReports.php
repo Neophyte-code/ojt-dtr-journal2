@@ -28,6 +28,7 @@ class WeeklyReports extends Model
         'entries',
         'journal_number',
         'track',
+        'work_category',
     ];
 
     public function userWeeklyReports()

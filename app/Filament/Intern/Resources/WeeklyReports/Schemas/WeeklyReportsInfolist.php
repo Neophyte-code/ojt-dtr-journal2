@@ -34,8 +34,8 @@ class WeeklyReportsInfolist
                         ->columnSpan(1)
                         ->label('Journal Number'),
                         
-                    TextEntry::make('track')
-                        ->label('Intern Track')
+                    TextEntry::make('work_category')
+                        ->label('Work Category')
                         ->size(TextSize::Medium)
                         ->formatStateUsing(fn ($state) => match($state) {
                             'development' => 'Development',
