@@ -49,12 +49,14 @@ class UsersTable
                         1 => 'Day Shift',
                         2 => 'Night Shift',
                         3 => 'Mid Shift',
+                        4 => 'Graveyard Shift',
                         default => ucfirst($state),
                     })
                     ->color(fn (int $state) => match ($state) {
                         1 => 'Day',   // yellow
                         2 => 'Night',
                         3 => 'warning',
+                        4 => 'danger',
                         default => 'gray',
                     })
                     ->searchable(),

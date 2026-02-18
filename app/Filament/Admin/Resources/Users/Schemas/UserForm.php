@@ -8,6 +8,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Shift;
 
 class UserForm
 {
@@ -45,12 +46,11 @@ class UserForm
                             
                             ->reactive()
                             ->required(),
-                        Select::make('shift_id')
+                            Select::make('shift_id')
                             ->label('Shift')
-                            ->options([1 => 'Day Shift', 2 => 'Night Shift', 3 => 'Mid Shift'])
-                            ->native(false)
-                            ->default(null)
-                            ->required(fn ($get) => $get('role') === 'intern'),
+                            ->options(fn() => Shift::pluck('name', 'id')->toArray())
+                            ->searchable()
+                            ->required()
                     ])
                     ->columnSpanFull()
                     ->columns(2),
